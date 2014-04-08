@@ -39,10 +39,8 @@
 		  }
 		else
 		  {
-		  move_uploaded_file($_FILES["file"]["tmp_name"]);
-		  //$exif = exif_read_data($_FILES['file']['tmp_name']);
-		  
-		  //phpinfo();
+		
+
 		  "upload/" . $_FILES["file"]["name"]);
 		  echo "Stored in: " . "upload/" . $_FILES["file"]["name"];
 		  $filename = $_FILES["file"]["name"];
@@ -51,17 +49,8 @@
 		  echo $userid;
 		  $alname = $_POST['an'];
 		  echo $alname;
-		  getAlbumID($userid, $alname); 
-		  //echo "$albumID !!!!!!!!!!!!!!!!" . <br />;
+		  $aid = getAlbumID($userid, $alname); 
 		  
-		  foreach ($exif as $key => $section) {
-			 foreach ($section as $name => $val) {
-			 echo "$key.$name: $val<br />\n";
-			 }
-		   }
-		  $lon = getGps($exif["GPSLongitude"], $exif['GPSLongitudeRef']);
-		  $lat = getGps($exif["GPSLatitude"], $exif['GPSLatitudeRef']);
-		  var_dump($lat, $lon);
 		  createThumbnail($filename);  
 		  
 		  $albumID = 123;
