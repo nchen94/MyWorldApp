@@ -3,55 +3,78 @@
 <html>
  <head>
   <title>
-   Welcome
+   File Upload
   </title>
-  <?php 
-   if ($_POST['pw'] != $_POST['vpw'])
-     {
-       echo "passwords were not the same";
-       exit;       
-     }
-   if ($_POST['un'] == 'username' || $_POST['pw'] == 'password' || $_POST['em'] == 'email') {
-       echo "Please input new items intos the corresponding fields";
-       exit;	
-     }
-   else {
-     $usrn = $_POST['un'];
-     $passw = $_POST['pw'];
-     $email = $_POST['em'];
-	 $firstn = $_POST['fn'];
-	 $lastn = $_POST['ln'];
-     }
-  ?>
-   
  </head>
- <body>
-  <?php
-   $dbconn = pg_connect("host=postgres.cise.ufl.edu port=5432 dbname=atheteodb user=jclewis password=2991Uf!1855") or die('connection failed');
-    $chkUsrn = pg_query($dbconn, "select username from users where username='$usrn'");
-    $chkEmail = pg_query($dbconn, "select email from users where email='$email'");
-	$dbusrn = pg_fetch_result($chkUsrn,0,0);
-	if($dbusrn == $usrn || $dbemail == $email){
-	if ($dbusrn == $usrn) {
-	 echo "This username is already taken.\n";
-	}
-	$dbemail = pg_fetch_result($chkEmail,0,0);
-	if ($dbemail == $email) {
-	 echo "This email is already taken.\n";
-	}
-	}else {
-	 $maxId = pg_query($dbconn, "select max(userid) from users");
- 	 $newId = pg_fetch_result($maxId,0,0) + 1;
-	
-	 pg_query($dbconn, "insert into users (username, email, userid, firstn, lastn) values ('$usrn','$email',$newId, '$firstn', '$lastn')");
-	 pg_query($dbconn, "insert into password (userid, pw) values ($newId,'$passw')");
-	 pg_query($dbconn, "insert into friends (userid, friendreq, friend) values ($newId, '{}', '{}')");
-	 echo "Welcome to the club, $usrn";
-	}
-   ?>
-  <form name='form' method='post' action='index.php'>
-   <input type="Submit" value="Back">
-  </form>
- </body>
+<body>
+<?php
 
+
+	require 'functions.php';
+	session_start();
+
+
+	$allowedExts = array("gif", "jpeg", "jpg", "png");
+	$temp = explode(".", $_FILES["file"]["name"]);
+	$extension = end($temp);
+	if ((($_FILES["file"]["type"] == "image/gif")
+	|| ($_FILES["file"]["type"] == "image/jpeg")
+	|| ($_FILES["file"]["type"] == "image/jpg")
+	|| ($_FILES["file"]["type"] == "image/png"))
+	&& in_array(strtolower($extension), $allowedExts))
+	  {
+	  if ($_FILES["file"]["error"] > 0)
+		{
+		echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
+		}
+	  else
+		{
+		echo "Upload: " . $_FILES["file"]["name"] . "<br>";
+		echo "Type: " . $_FILES["file"]["type"] . "<br>";
+		echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
+	
+		if (file_exists("upload/" . $_FILES["file"]["name"]))
+		  {
+		  echo $_FILES["file"]["name"] . " already exists. ";
+		  }
+		else
+		  {
+		  move_uploaded_file($_FILES["file"]["tmp_name"]);
+		  //$exif = exif_read_data($_FILES['file']['tmp_name']);
+		  
+		  //phpinfo();
+		  "upload/" . $_FILES["file"]["name"]);
+		  echo "Stored in: " . "upload/" . $_FILES["file"]["name"];
+		  $filename = $_FILES["file"]["name"];
+		  
+		  $userid = $_SESSION['user'];
+		  echo $userid;
+		  $alname = $_POST['an'];
+		  echo $alname;
+		  getAlbumID($userid, $alname); 
+		  //echo "$albumID !!!!!!!!!!!!!!!!" . <br />;
+		  
+		  foreach ($exif as $key => $section) {
+			 foreach ($section as $name => $val) {
+			 echo "$key.$name: $val<br />\n";
+			 }
+		   }
+		  $lon = getGps($exif["GPSLongitude"], $exif['GPSLongitudeRef']);
+		  $lat = getGps($exif["GPSLatitude"], $exif['GPSLatitudeRef']);
+		  var_dump($lat, $lon);
+		  createThumbnail($filename);  
+		  
+		  $albumID = 123;
+		  $location = 3;
+		  savePhoto($albumID, $filename, $location);
+		  }
+		}
+	
+	  }
+	else
+	  {
+	  echo "Invalid file";
+	  }
+?>
+ </body>
 </html>
