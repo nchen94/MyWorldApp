@@ -5,6 +5,7 @@
   <title>
    Login
   </title>
+  <link href = "Site.css" rel = "stylesheet">
   <?php 
 	session_start();
   
@@ -23,6 +24,7 @@
    
  </head>
  <body>
+  <div id="main">
   <?php
    $dbconn = pg_connect("host=postgres.cise.ufl.edu port=5432 dbname=atheteodb user=jclewis password=2991Uf!1855") or die('connection failed');
    $result = pg_query($dbconn, "select username, pw from users natural join password where username='$usrn'");
@@ -61,6 +63,7 @@
 	<input type="file" name="file" id="file"><br>
 	<input type="submit" name="submit" value="Upload">
 	</form>
+  </div>
  </body>
 
 </html>
