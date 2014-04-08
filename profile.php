@@ -42,6 +42,9 @@
 	
 	}
    ?>
+   <form name="form" method"post" action="friendreq.php">
+   <input type="submit" value="Friend Requests"> 
+   </form>
    <form name="form" method="post" action="befriends.php">
    <input type="Text" value="" name="person" id="person">
 	<input type="submit" value="Friend">
