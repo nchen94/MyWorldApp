@@ -14,8 +14,7 @@
    $dbconn = pg_connect("host=postgres.cise.ufl.edu port=5432 dbname=atheteodb user=jclewis password=2991Uf!1855") or die('connection failed');
    $result = pg_query($dbconn, "select username, userid from users where username='$frd'");
    $result2 = pg_query($dbconn, "select userid from users where username='$usrn'");
-   pg_close($dbconn);
-   
+  
    $friend = pg_fetch_result($result,0,0);      
    if ($friend == $frd && $frd != $usrn) {
 	$frdId = pg_fetch_result($result,0,1);
@@ -24,6 +23,7 @@
    
 	echo "Friend request sent to $friend.";
 	}
+	 pg_close($dbconn);
    else {
     echo "$frd does not exist.";
 	exit; 
