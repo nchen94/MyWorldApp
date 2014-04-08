@@ -78,12 +78,15 @@ function savePhoto($albumID, $filename, $location)	{
 	 $maxPhotoId = pg_query($db, "select max(photoid) from photo");
  	 $PhotoId = pg_fetch_result($maxPhotoId,0,0)+1;
 	 pg_query($db, "insert into photo (albumid, photoid, photoname, lon, lat, date) values ($albumID, $PhotoId,'$tn',NULL,NULL,NULL)");
+	pg_close($db);
 }
 	
 function getAlbumID($userid, $alname){
 
 	$db = pg_connect("host=postgres.cise.ufl.edu port=5432 dbname=atheteodb user=jclewis password=2991Uf!1855") or die('connection failed');
-    $AId = pg_query($db, "select EXISTS (SELECT albumid FROM albums WHERE userid = $userid and albumname = '$alname')::int as answer");
+    	$AId = pg_query($db, "select EXISTS (SELECT albumid FROM albums WHERE userid = $userid and albumname = '$alname')::int as answer");
+	pg_close($db);
+	
 	$albumname = pg_fetch_result($AId,0,0);
 	echo $albumname;
 	echo $AId;
