@@ -45,6 +45,8 @@
 	
 	 pg_query($dbconn, "insert into users (username, email, userid, firstn, lastn) values ('$usrn','$email',$newId, '$firstn', '$lastn')");
 	 pg_query($dbconn, "insert into password (userid, pw) values ($newId,'$passw')");
+	 
+	 pg_close($dbconn);
 	 echo "Welcome to the club, $usrn";
 	}
    ?>
