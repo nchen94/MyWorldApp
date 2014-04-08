@@ -25,7 +25,8 @@
  <body>
   <?php
    $dbconn = pg_connect("host=postgres.cise.ufl.edu port=5432 dbname=atheteodb user=jclewis password=2991Uf!1855") or die('connection failed');
-    $result = pg_query($dbconn, "select username, pw from users natural join password where username='$usrn'");
+   $result = pg_query($dbconn, "select username, pw from users natural join password where username='$usrn'");
+   pg_close($dbconn);
 	if (!$result) {
 	 echo "An error has occurred.\n";
 	 exit;
