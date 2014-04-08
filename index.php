@@ -8,7 +8,7 @@
   </title>
  </head>
  <body>
-  <form name='form' method='post' action='test.php'>
+  <form name='form' method='post' action='profile.php'>
    Username: <input type = "Text" value = "" name = "un" id="un">
    Password: <input type = "password" value="" name= "pw" id="pw">
    <input type = "Submit" value = "Login">
