@@ -18,7 +18,7 @@
    if ($friend == $frd && $frd != $usrn) {
 	$frdId = pg_fetch_result($result,0,1);
 	$myId = pg_fetch_result($result2,0,0);
-	$tur = pg_query($dbconn, "update friends set friendreq = (select array_append((select friend from friends where userid = $frdId),$myId)) where userid=$frdId");
+	$tur = pg_query($dbconn, "insert into friendreq (userid, friendreqid) values ($frdId, $myId)");
    
 	echo "Friend request sent to $friend.";
 	}
