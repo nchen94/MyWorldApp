@@ -89,6 +89,18 @@ function getAlbumID($userid, $alname){
 	echo $AId;
 	if ($AId == $albumname)
 }
+function addFriend($userid,$frdID,$type) {
+	$db = pg_connect("host=postgres.cise.ufl.edu port=5432 dbname=atheteodb user=jclewis password=2991Uf!1855") or die('connection failed');
+    if ($type=="accept") {
+        $query = pg_query($db, "insert into friends(userid, friendid) values ($userid, $frdID)");
+		$query2 = pg_query($db, "insert into friends(userid, friendid) values ($frdID, $userid)");
+        $delete_request = pg_query($db, "DELETE FROM friendreq WHERE userid=$frdID AND friendreqid=$userid");        
+    }
+    if ($type=="decline") {
+        $delete_request = pg_query($db, "DELETE FROM friendreq WHERE userid=$frdID AND friendreqid=$userid"); 
+    }
+	pg_close($db);
+}
 ?>
 
 
