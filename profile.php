@@ -42,7 +42,7 @@
 	
 	}
    ?>
-   <form name="form" method="post" action="test2.php">
+   <form name="form" method="post" action="befriends.php">
    <input type="Text" value="" name="person" id="person">
 	<input type="submit" value="Friend">
    </form>
