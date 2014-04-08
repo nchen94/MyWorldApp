@@ -4,7 +4,7 @@
 <html>
  <head>
   <title>
-   Treasure Finder
+   Treasure Hunters
   </title>
  </head>
  <body>
