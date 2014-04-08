@@ -14,7 +14,7 @@
    <input type = "Submit" value = "Login">
   </form>
   <form name='form' method='post' action='signup.php'>
-   <p>Don't have an account?
+   <p>Don't have an account? 
     <input type="Submit" value="Signup">
    </p>
   </form> 
