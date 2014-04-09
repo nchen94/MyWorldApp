@@ -1,2 +1,0 @@
-AddHandler cgi-script .php
-DirectoryIndex index.php text.php test2.php signup.php welcome.php upload_file.php config.php functions.php index.html 
