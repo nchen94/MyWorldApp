@@ -6,17 +6,10 @@
   <title>
    Treasure Hunters
   </title>
-  <style>
-     h {
-     	text-align: center; 
-     	text-transform: capitalize;
-     	font: Georgia, serif;
-      font-size: 2.5em; 
-     	color: #996600;
-     }      
-  </style>
+  <link href="Site.css" rel="stylesheet">   
  </head>
  <body>
+  <div id = "main">
   <h>Treasure Hunters</h>
   <form name = 'form' method = 'post' action = 'profile.php'>
    Username: <input type = "Text" value = "" name = "un" id = "un">
@@ -27,6 +20,8 @@
    <p>Don't have an account? 
     <input type = "Submit" value = "Signup">
    </p>
-  </form> 
+  </form>
+  <?php include("Footer.php"); ?> 
+  </div>
  </body>
 </html>
