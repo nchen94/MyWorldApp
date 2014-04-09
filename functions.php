@@ -91,6 +91,7 @@ function getAlbumID($userid, $alname){
 	echo $albumname;
 	echo $AId;
 	if ($AId == $albumname)
+	{}
 }
 function addFriend($userid,$frdID,$type) {
 	$db = pg_connect("host=postgres.cise.ufl.edu port=5432 dbname=atheteodb user=jclewis password=2991Uf!1855") or die('connection failed');
